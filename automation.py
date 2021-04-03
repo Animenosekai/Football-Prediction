@@ -10,7 +10,6 @@ from datetime import datetime, timedelta # Execute the program each day at the s
 from threading import Timer
 import time
 import schedule
-import os
 
 import smtplib, ssl
 from email.mime.multipart import MIMEMultipart
@@ -24,10 +23,10 @@ from email.mime.text import MIMEText
 
 # secs = delta_t.total_seconds() # On exprime le temps entre chaques répétitions du programme en secondes
 
-addresses = [os.getenv("EMAIL1"), os.getenv("EMAIL2")]
+addresses = ["bastien.lasorne@gmail.com", "pierre78.loevenbruck@gmail.com"]
 
 def send_mail(**kwargs):
-    from_addr = os.getenv("MAINEMAIL")
+    from_addr = "lespronosdebastien@gmail.com"
     day_matches = 0
     for league in all_stats:
         day_matches += len(league)
@@ -57,7 +56,7 @@ def send_mail(**kwargs):
                 content += match_content
 
     # port = 465  # For SSL
-    password = os.getenv("PASSWORD")
+    password = ""
     
     # header = """From: {},
     # To: {},
@@ -86,8 +85,6 @@ def send_mail(**kwargs):
     # problems = server.sendmail(from_addr, email_address, msg.encode("utf-8"))
     server.send_message(msg)
     server.quit()
-
-
 
 
 
